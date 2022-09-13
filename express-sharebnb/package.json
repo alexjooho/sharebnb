@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.170.0",
+    "@aws-sdk/s3-request-presigner": "^3.170.0",
     "aws-sdk": "^2.1215.0",
     "bcrypt": "*",
     "colors": "*",
@@ -22,7 +24,8 @@
     "jsonwebtoken": "*",
     "morgan": "*",
     "multer": "^1.4.5-lts.1",
-    "pg": "^8.8.0"
+    "pg": "^8.8.0",
+    "sharp": "^0.31.0"
   },
   "devDependencies": {
     "supertest": "^6.1.3"

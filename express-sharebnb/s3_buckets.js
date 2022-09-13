@@ -1,32 +1,72 @@
 require('dotenv').config();
 const fs = require('fs');
-const S3 = require('aws-sdk/clients/s3');
-const { LexModelBuildingService } = require('aws-sdk');
+const {
+    S3Client,
+    PutObjectCommand,
+    GetObjectCommand,
+    DeleteObjectCommand } = require('@aws-sdk/client-s3');
 
-const bucketName = process.env.AWS_BUCKET_NAME;
-const region = process.env.AWS_BUCKET_REGION;
-const accessKeyId = process.env.AWS_ACCESS_KEY;
-const secretAccessKey = process.env.AWS_SECRET_KEY;
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const sharp = require('sharp');
 
-const s3 = new S3({
-    region,
-    accessKeyId,
-    secretAccessKey
-})
+const bucketName = process.env.BUCKET_NAME;
+const region = process.env.BUCKET_REGION;
+const accessKeyId = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_KEY;
+
+const s3 = new S3Client({
+    credentials: {
+        accessKeyId,
+        secretAccessKey
+    },
+    region
+});
 
 // uploads a file to s3
-function upload(file) {
-    const fileStream = fs.createReadStream(file.path)
-    
-    const uploadParams = {
+async function uploadImg(Key, Body, ContentType) {
+
+    const buffer = await
+        sharp(Body).resize(
+            { height: 1000, width: 1000, fit: "contain" }
+        ).toBuffer();
+    const params = {
         Bucket: bucketName,
-        Body: fileStream,
-        key: file.filename
-    }
-    
-    return s3.upload(uploadParams).promise();
+        Key,
+        Body: buffer,
+        ContentType
+    };
+
+    const command = new PutObjectCommand(params);
+
+    await s3.send(command);
+
+    // return s3.upload(uploadParams).promise();
+}
+
+async function getImgUrl(Key) {
+    const params = {
+        Bucket: bucketName,
+        Key
+    };
+    // https://aws.amazon.com/blogs/developer/generate-presigned-url-modular-aws-sdk-javascript/
+    const command = new GetObjectCommand(params);
+    const seconds = 3600;
+    const url = await getSignedUrl(s3, command, { expiresIn: seconds });
+
+    return url;
+}
+
+function deleteImg(fileName) {
+    const deleteParams = {
+        Bucket: bucketName,
+        Key: fileName,
+    };
+
+    return s3.send(new DeleteObjectCommand(deleteParams));
 }
 
 module.exports = {
-    upload,
-}
+    uploadImg,
+    getImgUrl,
+    deleteImg
+};

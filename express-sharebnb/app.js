@@ -22,8 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 // app.use(authenticateJWT);
 
-app.use("/auth", authRoutes);
-app.use("/users", usersRoutes);
+// app.use("/auth", authRoutes);
+// app.use("/users", usersRoutes);
 app.use("/properties", propertiesRoutes);
 
 /** Handle 404 errors -- this matches everything */

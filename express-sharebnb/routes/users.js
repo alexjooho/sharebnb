@@ -10,6 +10,8 @@ const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
 const { createToken } = require("../helpers/tokens");
 
+const bookingNewSchema = require("../schemas/bookingNew.json");
+
 const router = express.Router();
 
 /** GET /[username]/bookings => { user }
@@ -21,11 +23,11 @@ const router = express.Router();
  **/
 
 router.get("/:username/bookings",
-  ensureCorrectUser,
-  async function (req, res, next) {
-    const user = await User.getBookings(req.params.username);
-    return res.json({ user });
-  });
+    ensureCorrectUser,
+    async function (req, res, next) {
+        const user = await User.getBookings(req.params.username);
+        return res.json({ user });
+    });
 
 
 /** GET /[username] => { user }
@@ -37,10 +39,10 @@ router.get("/:username/bookings",
  **/
 
 router.get("/:username",
-  async function (req, res, next) {
-    const user = await User.get(req.params.username);
-    return res.json({ user });
-  });
+    async function (req, res, next) {
+        const user = await User.get(req.params.username);
+        return res.json({ user });
+    });
 
 /** POST /[username]/book
  *
@@ -52,21 +54,21 @@ router.get("/:username",
  * */
 
 router.post("/:username/book", ensureCorrectUser, async function (req, res, next) {
-  const validator = jsonschema.validate(
-    req.body,
-    bookingNewSchema,
-    { required: true }
-  );
+    const validator = jsonschema.validate(
+        req.body,
+        bookingNewSchema,
+        { required: true }
+    );
 
-  if (!validator.valid) {
-    const errs = validator.errors.map(e => e.stack);
-    throw new BadRequestError(errs);
-  }
+    if (!validator.valid) {
+        const errs = validator.errors.map(e => e.stack);
+        throw new BadRequestError(errs);
+    }
 
-  const { propertyName, startDate, endDate } = req.body;
+    const { propertyName, startDate, endDate } = req.body;
 
-  await User.bookingProperty(req.params.username, propertyName, startDate, endDate);
-  return res.json({ booked: propertyName });
+    await User.bookingProperty(req.params.username, propertyName, startDate, endDate);
+    return res.json({ booked: propertyName });
 
 });
 

@@ -37,59 +37,59 @@ const randomImageName = (bytes = 16) => crypto.randomBytes(bytes).toString('hex'
 
 // retreive username from user
 router.post("/",
-ensureLoggedIn,
-upload.array("image", 3),
-async function (req, res, next) {
-  let propertyData = req.body;
-  if (propertyData.price !== undefined) propertyData.price = +propertyData.price;
+    ensureLoggedIn,
+    upload.array("image", 3),
+    async function (req, res, next) {
+        let propertyData = req.body;
+        if (propertyData.price !== undefined) propertyData.price = +propertyData.price;
 
-  propertyData.owner = res.local.user.username;
+        propertyData.owner = res.local.user.username;
 
-  const validator = jsonschema.validate(
-    propertyData,
-    propertyNewSchema,
-    { required: true }
-  );
+        const validator = jsonschema.validate(
+            propertyData,
+            propertyNewSchema,
+            { required: true }
+        );
 
-  if (!validator.valid) {
-    const errs = validator.errors.map(e => e.stack);
-    throw new BadRequestError(errs);
-  }
+        if (!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+            throw new BadRequestError(errs);
+        }
 
-  const key = randomImageName();
-  const body = req.files[0].buffer;
-  const contentType = req.files[0].mimetype;
+        const key = randomImageName();
+        const body = req.files[0].buffer;
+        const contentType = req.files[0].mimetype;
 
-  await uploadImg(key, body, contentType);
-  const imageUrl = getImgUrl(key);
+        await uploadImg(key, body, contentType);
+        const imageUrl = getImgUrl(key);
 
-  propertyData.imageUrl = imageUrl;
+        propertyData.imageUrl = imageUrl;
 
-  const property = await Property.create(propertyData);
-  return res.status(201).json({ property });
-});
+        const property = await Property.create(propertyData);
+        return res.status(201).json({ property });
+    });
 
 /** test for making sure aws works */
 router.post("/image", upload.single("image"), async function (req, res, next) {
-  const file = req.file;
-  console.log(file);
-  console.log("REQ BODY", req.body);
-  const buffer = file.buffer;
+    const file = req.file;
+    console.log(file);
+    console.log("REQ BODY", req.body);
+    const buffer = file.buffer;
 
-  const key = randomImageName();
-  const body = req.file.buffer;
-  const contentType = req.file.mimetype;
+    const key = randomImageName();
+    const body = req.file.buffer;
+    const contentType = req.file.mimetype;
 
-  await uploadImg(key, body, contentType);
+    await uploadImg(key, body, contentType);
 
-  const imageUrl = getImgUrl(key);
+    const imageUrl = getImgUrl(key);
 
-  //caption: req.body.caption, imageName
+    //caption: req.body.caption, imageName
 
-  // has filename, path, destination, etc
+    // has filename, path, destination, etc
 
-  // const description = req.body.description;
-  return res.json({ imageUrl });
+    // const description = req.body.description;
+    return res.json({ imageUrl });
 });
 
 /** GET /  =>
@@ -102,19 +102,19 @@ router.post("/image", upload.single("image"), async function (req, res, next) {
  */
 
 router.get("/", async function (req, res, next) {
-  const validator = jsonschema.validate(
-    req.query,
-    propertySearchSchema,
-    { required: true }
-  );
+    const validator = jsonschema.validate(
+        req.query,
+        propertySearchSchema,
+        { required: true }
+    );
 
-  if (!validator.valid) {
-    const errs = validator.errors.map(e => e.stack);
-    throw new BadRequestError(errs);
-  }
+    if (!validator.valid) {
+        const errs = validator.errors.map(e => e.stack);
+        throw new BadRequestError(errs);
+    }
 
-  const properties = await Property.findAll(req.query);
-  return res.json({ properties });
+    const properties = await Property.findAll(req.query);
+    return res.json({ properties });
 });
 
 /** GET /[name]  =>  { property }
@@ -128,8 +128,8 @@ router.get("/", async function (req, res, next) {
  */
 
 router.get("/:name", async function (req, res, next) {
-  const property = await Property.get(req.params.name);
-  return res.json({ property });
+    const property = await Property.get(req.params.name);
+    return res.json({ property });
 });
 
 /** PATCH /[name] { fld1... }, image file => { property }
@@ -144,37 +144,37 @@ router.get("/:name", async function (req, res, next) {
  */
 
 router.patch("/:name",
-  upload.array("image", 3),
-  ensureCorrectUser,
-  async function (req, res, next) {
-    let propertyData = req.body;
-    if (propertyData.price !== undefined) propertyData.price = +propertyData.price;
+    upload.array("image", 3),
+    ensureCorrectUser,
+    async function (req, res, next) {
+        let propertyData = req.body;
+        if (propertyData.price !== undefined) propertyData.price = +propertyData.price;
 
-    const validator = jsonschema.validate(
-      propertyData,
-      propertyUpdateSchema,
-      { required: true }
-    );
+        const validator = jsonschema.validate(
+            propertyData,
+            propertyUpdateSchema,
+            { required: true }
+        );
 
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
+        if (!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+            throw new BadRequestError(errs);
+        }
 
-    const { imageUrl } = await Property.get(req.params.name);
-    deleteImg(imageUrl);
+        const { imageUrl } = await Property.get(req.params.name);
+        deleteImg(imageUrl);
 
-    const key = randomImageName();
-    const body = req.files[0].buffer;
-    const contentType = req.files[0].mimetype;
+        const key = randomImageName();
+        const body = req.files[0].buffer;
+        const contentType = req.files[0].mimetype;
 
-    await uploadImg(key, body, contentType);
-    const newImageUrl = getImgUrl(key);
+        await uploadImg(key, body, contentType);
+        const newImageUrl = getImgUrl(key);
 
-    propertyData.imageUrl = newImageUrl;
+        propertyData.imageUrl = newImageUrl;
 
-    const property = await Property.update(req.params.name, propertyData);
-    return res.json({ property });
-  });
+        const property = await Property.update(req.params.name, propertyData);
+        return res.json({ property });
+    });
 
 module.exports = router;

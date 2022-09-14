@@ -6,13 +6,16 @@ const {
     GetObjectCommand,
     DeleteObjectCommand } = require('@aws-sdk/client-s3');
 
-const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+// const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const sharp = require('sharp');
 
 const bucketName = process.env.BUCKET_NAME;
 const region = process.env.BUCKET_REGION;
 const accessKeyId = process.env.ACCESS_KEY;
 const secretAccessKey = process.env.SECRET_KEY;
+
+const AWS_BASE_URL = `https://${bucketName}.s3.${region}.amazonaws.com`
+// https://ak-sharebnb.s3.us-west-1.amazonaws.com/Champion-List.jpg
 
 const s3 = new S3Client({
     credentials: {
@@ -43,16 +46,17 @@ async function uploadImg(Key, Body, ContentType) {
     // return s3.upload(uploadParams).promise();
 }
 
-async function getImgUrl(Key) {
-    const params = {
-        Bucket: bucketName,
-        Key
-    };
+function getImgUrl(key) {
+    // const params = {
+    //     Bucket: bucketName,
+    //     Key
+    // };
     // https://aws.amazon.com/blogs/developer/generate-presigned-url-modular-aws-sdk-javascript/
-    const command = new GetObjectCommand(params);
-    const seconds = 3600;
-    const url = await getSignedUrl(s3, command, { expiresIn: seconds });
-
+    // const command = new GetObjectCommand(params);
+    // const seconds = 3600;
+    // const url = await getSignedUrl(s3, command, { expiresIn: seconds });
+    const url = `AWS_BASE_URL/${key}`
+    
     return url;
 }
 

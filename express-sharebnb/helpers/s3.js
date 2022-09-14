@@ -55,7 +55,7 @@ function getImgUrl(key) {
     // const command = new GetObjectCommand(params);
     // const seconds = 3600;
     // const url = await getSignedUrl(s3, command, { expiresIn: seconds });
-    const url = `AWS_BASE_URL/${key}`
+    const url = `${AWS_BASE_URL}/${key}`
     
     return url;
 }
@@ -74,3 +74,10 @@ module.exports = {
     getImgUrl,
     deleteImg
 };
+
+let obj = {
+    "name": "cool condo",
+    "address": "123 cool way drive",
+    "owner": "testuser",
+    "price": 5000000000
+}

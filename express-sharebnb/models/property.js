@@ -44,7 +44,7 @@ class Property {
 
     return property;
   }
-  
+
   /** Create WHERE clause for filters, to be used by functions that query
    * with filters.
    *
@@ -72,7 +72,7 @@ class Property {
 
     return { where, vals };
   }
-  
+
   /** Find all properties (optional filter on searchFilters).
    *
    * searchFilters (all optional):
@@ -97,7 +97,7 @@ class Property {
     `, vals);
     return propertiesRes.rows;
   }
-  
+
   /** Given a property name, return data about property.
    *
    * Returns { name, address, imageUrl, owner, price, bookings}
@@ -113,7 +113,7 @@ class Property {
                 image_url as "imageUrl",
                 owner,
                 price
-           FROM companies
+           FROM properties
            WHERE name = $1`,
         [name]);
 
@@ -137,7 +137,7 @@ class Property {
 
     return property;
   }
-  
+
   /** Update property data with `data`.
    *
    * This is a "partial update" --- it's fine if data doesn't contain all the
@@ -169,7 +169,7 @@ class Property {
 
     return property;
   }
-  
+
   /** Delete given property from database; returns undefined.
    *
    * Throws NotFoundError if property not found.

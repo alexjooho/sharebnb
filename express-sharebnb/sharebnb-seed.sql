@@ -10,9 +10,9 @@ VALUES ('testuser',
         'Admin!',
         'joel@joelburton.com');
 
-INSERT INTO properties (address, image_url, owner, price)
-VALUES ('123 classic drive', 'https://ak-sharebnb.s3.us-west-1.amazonaws.com/Champion-List.jpg',
+INSERT INTO properties (name, address, image_url, owner, price)
+VALUES ('classic', '123 classic drive', 'https://ak-sharebnb.s3.us-west-1.amazonaws.com/Champion-List.jpg',
         'testuser', 315),
-        ('456 newplace drive', 
+        ('newplace', '456 newplace drive',
         'https://ak-sharebnb.s3.us-west-1.amazonaws.com/this-is-fine-when-your-entire-team-is-toxic-and-2034205.png',
         'testadmin', 620);

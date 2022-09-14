@@ -56,14 +56,16 @@ function getImgUrl(key) {
     // const seconds = 3600;
     // const url = await getSignedUrl(s3, command, { expiresIn: seconds });
     const url = `${AWS_BASE_URL}/${key}`
-    
+
     return url;
 }
 
-function deleteImg(fileName) {
+function deleteImg(url) {
+    const Key = url.replace(`${AWS_BASE_URL}/`, "");
+
     const deleteParams = {
         Bucket: bucketName,
-        Key: fileName,
+        Key
     };
 
     return s3.send(new DeleteObjectCommand(deleteParams));

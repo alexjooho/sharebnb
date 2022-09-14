@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://our.company.com/bookingNew.schema.json",
+  "type": "object",
+  "properties": {
+    "propertyName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "propertyName",
+    "startDate",
+    "endDate"
+  ]
+}

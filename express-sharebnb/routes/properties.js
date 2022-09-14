@@ -1,9 +1,9 @@
 "use strict";
 
-require("../s3_buckets.js")
+require("../helper/s3_buckets.js")
 
 const crypto = require("crypto")
-const { uploadImg, getImgUrl, deleteImg } = require("../s3_buckets.js");
+const { uploadImg, getImgUrl, deleteImg } = require("../helper/s3_buckets.js");
 
 /** Routes for properties. */
 

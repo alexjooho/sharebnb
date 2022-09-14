@@ -142,15 +142,27 @@ class Property {
      *
      * This is a "partial update" --- it's fine if data doesn't contain all the
      * fields; this only changes provided ones.
-     *
-     * Data can include: { address, imageUrl, owner, price}
+     * 
+     * Accepts name, username, and data
+     * name: The name of the property to update,
+     * username: The username of the property owner,
+     * Data: can include { address, imageUrl, owner, price}
      *
      * Returns {name, address, imageUrl, owner, price}
      *
      * Throws NotFoundError if not found.
      */
 
-    static async update(name, data) {
+    static async update(name, username, data) {
+        const checkPropertyAndOwner = await db.query(
+            `SELECT name, owner
+               FROM properties
+               WHERE name = $1`, [name]);
+        const checkProperty = checkPropertyAndOwner.rows[0];
+        if (!checkProperty) throw new NotFoundError(`No property: ${name}`);
+        if (checkProperty.owner !== username) throw new BadRequestError(
+            "STOP TRYING TO HACK OTHERS' PROPERTIES!!!");
+        
         const { setCols, values } = sqlForPartialUpdate(
             data,
             {
@@ -164,8 +176,6 @@ class Property {
                         RETURNING name, address, image_url as "imageUrl", owner, price`;
         const result = await db.query(querySql, [...values, name]);
         const property = result.rows[0];
-
-        if (!property) throw new NotFoundError(`No property: ${name}`);
 
         return property;
     }

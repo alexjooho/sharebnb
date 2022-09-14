@@ -43,8 +43,6 @@ router.post("/",
         let propertyData = req.body;
         if (propertyData.price !== undefined) propertyData.price = +propertyData.price;
 
-        propertyData.owner = res.local.user.username;
-
         const validator = jsonschema.validate(
             propertyData,
             propertyNewSchema,
@@ -55,6 +53,8 @@ router.post("/",
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
         }
+        
+        propertyData.owner = res.locals.user.username;
 
         const key = randomImageName();
         const body = req.files[0].buffer;
@@ -143,7 +143,7 @@ router.get("/:name", async function (req, res, next) {
  * Authorization required: correct user
  */
 
-router.patch("/:name",
+router.patch("/:name/:username",
     upload.array("image", 3),
     ensureCorrectUser,
     async function (req, res, next) {
@@ -173,7 +173,7 @@ router.patch("/:name",
 
         propertyData.imageUrl = newImageUrl;
 
-        const property = await Property.update(req.params.name, propertyData);
+        const property = await Property.update(req.params.name, req.params.username, propertyData);
         return res.json({ property });
     });
 

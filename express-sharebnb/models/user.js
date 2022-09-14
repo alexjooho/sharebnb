@@ -169,7 +169,7 @@ class User {
     const preCheckProperty = await db.query(
       `SELECT name
          FROM properties
-         WHERE id = $1`, [propertyName]);
+         WHERE name = $1`, [propertyName]);
     const property = preCheckProperty.rows[0];
 
     if (!property) throw new NotFoundError(`No property: ${propertyName}`);
@@ -200,8 +200,8 @@ class User {
           end_date,
           booker,
           property_name)
-         VALUES ($1, $2, $3, $4, $5)`,
-      [current_timestamp, startDate, endDate, username, propertyName]);
+         VALUES (current_timestamp, $1, $2, $3, $4)`,
+      [startDate, endDate, username, propertyName]);
   }
 
 }

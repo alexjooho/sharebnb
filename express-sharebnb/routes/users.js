@@ -35,7 +35,6 @@ router.get("/:username/bookings",
  * Returns { username, firstName, lastName, email, properties }
  *   where properties { name, address, image_url, price }
  *
- * Authorization required: user
  **/
 
 router.get("/:username",
@@ -66,6 +65,10 @@ router.post("/:username/book", ensureCorrectUser, async function (req, res, next
     }
 
     const { propertyName, startDate, endDate } = req.body;
+    
+    if(Date.parse(startDate) > Date.parse(endDate)) {
+        throw new BadRequestError("Start date must be before end date you dummy");
+    }
 
     await User.bookingProperty(req.params.username, propertyName, startDate, endDate);
     return res.json({ booked: propertyName });

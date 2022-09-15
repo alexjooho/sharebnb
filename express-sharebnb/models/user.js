@@ -93,7 +93,7 @@ class User {
 
   /** Given a username, return data about user.
      *
-     * Returns { username, first_name, last_name, email, properties}
+     * Returns { username, firstName, lastName, email, properties}
      *   where properties is [{ name, address, imageUrl, price },...]
      *
      * Throws NotFoundError if user not found.
@@ -125,9 +125,9 @@ class User {
 
   /** Given a username, return data about user and their bookings.
      *
-     * Returns { username, first_name, last_name, email, bookings}
+     * Returns { username, firstName, lastName, email, bookings}
      *   where bookings is:
-     *   [{ date_booked, start_date, end_date, property_name },...]
+     *   [{ dateBooked, startDate, endDate, propertyName },...]
      *
      * Throws NotFoundError if user not found.
      **/

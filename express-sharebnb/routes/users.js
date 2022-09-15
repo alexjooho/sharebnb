@@ -17,7 +17,7 @@ const router = express.Router();
 /** GET /[username]/bookings => { user }
  *
  * Returns { username, firstName, lastName, email, bookings }
- *   where bookings { date_booked, start_date, end_date, property_name }
+ *   where bookings [{ dateBooked, startDate, endDate, propertyNam }, ...]
  *
  * Authorization required: same user-as-:username
  **/
@@ -33,7 +33,7 @@ router.get("/:username/bookings",
 /** GET /[username] => { user }
  *
  * Returns { username, firstName, lastName, email, properties }
- *   where properties { name, address, image_url, price }
+ *   where properties { name, address, imageUrl, price }
  *
  **/
 

@@ -23,7 +23,7 @@ function Nav({ logout }) {
             </NavLink>
             <br />
             {user
-                ? <><NavLink className="bookings" to="/bookings">
+                ? <><NavLink className="Profile" to={`/users/${user.username}`}>
                     Your Bookings
                 </NavLink>
                     <br />

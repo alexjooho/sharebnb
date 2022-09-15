@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import "./PropertyCard.css";
 // import ListGroup from "react-bootstrap/ListGroup";
 
 /** Makes a property card given a property
  * Props:
  * - Property: An object with information about a property
  *
- * RoutesList -> p=Properties -> PropertyCardList -> PropertyCard
+ * RoutesList -> Properties -> PropertyCardList -> PropertyCard
  */
 function PropertyCard({ property }) {
   return (
@@ -17,7 +16,7 @@ function PropertyCard({ property }) {
           <Card.Img src={property.imageUrl} alt={property.name} variant="top"/>
           <Card.Body >
             <Card.Title>{property.name}</Card.Title>
-            <Card.Text>{property.address}</Card.Text>
+            <Card.Text>Address: {property.address}</Card.Text>
             <Card.Text>${property.price}/night</Card.Text>
           </Card.Body>
         </Card>
@@ -30,5 +29,3 @@ function PropertyCard({ property }) {
 // Maybe use ReactStrap?
 
 export default PropertyCard;
-
-

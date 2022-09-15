@@ -8,9 +8,9 @@ import PropertyCard from './PropertyCard'
  */
 function PropertyCardList({properties}) {
     return (
-        <>
+        <div className="property-card-list">
             {properties.map(property => <PropertyCard key={property.name} property={property}/>)}
-        </>
+        </div>
     )
 }
 

@@ -52,6 +52,7 @@ function BookForm({ property, toggleReserve, handleSave }) {
             <form className="NewBookForm" onSubmit={handleSubmit}>
 
                 <div className="mb-3">
+                    <label for="propertyName"> Property Name</label>
                     <input
                         id="propertyName"
                         name="propertyName"
@@ -59,12 +60,14 @@ function BookForm({ property, toggleReserve, handleSave }) {
                         onChange={handleChange}
                         value={formData.propertyName}
                         aria-label={property.name}
+                        required
                         disabled={true}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <textarea
+                    <label for="startDate"> Start Date </label>
+                    <input
                         id="startDate"
                         name="startDate"
                         className="form-control"
@@ -72,11 +75,13 @@ function BookForm({ property, toggleReserve, handleSave }) {
                         onChange={handleChange}
                         value={formData.startDate}
                         aria-label="Start Date"
+                        required
                     />
                 </div>
 
                 <div className="mb-3">
-                    <textarea
+                    <label for="endDate"> End Date </label>
+                    <input
                         id="endDate"
                         name="endDate"
                         className="form-control"
@@ -84,11 +89,13 @@ function BookForm({ property, toggleReserve, handleSave }) {
                         onChange={handleChange}
                         value={formData.endDate}
                         aria-label="End Date"
+                        required
                     />
                 </div>
 
                 <div className="mb-3">
-                    <textarea
+                    <label for="username"> Username </label>
+                    <input
                         id="username"
                         name="username"
                         className="form-control"
@@ -96,6 +103,7 @@ function BookForm({ property, toggleReserve, handleSave }) {
                         value={formData.username}
                         aria-label={username}
                         disabled={true}
+                        required
                     />
                 </div>
 

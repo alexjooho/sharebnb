@@ -1,0 +1,15 @@
+.home, .properties, .bookings, .logout, .login, .signup {
+    float: right;
+    padding: 12px;
+    color: blue;
+    text-decoration: none;
+    font-size: 17px;
+    width: 25%;
+    text-align: center;
+
+}
+
+.active {
+    color: black;
+    font-weight: bold;
+}

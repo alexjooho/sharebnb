@@ -1,40 +1,39 @@
 import SearchForm from "./SearchForm";
-import CompanyCardList from "./CompanyCardList";
+import PropertyCardList from "./PropertyCardList";
 import { useState, useEffect } from 'react';
-import JoblyApi from './api';
+import ShareApi from './api';
 
-/** Renders a list of all companies filtered by value of search form
+/** Renders a list of all properties filtered by value of search form
  * State:
- * - Companies: An object:
- *  {data: [company, company...],
+ * - Properties: An object:
+ *  {data: [Property, Property...],
  *   isLoading: true/false}
  *
- * RoutesList -> Companies -> CompanyCardList
+ * RoutesList -> Properties -> PropertyCardList
  */
-function Companies() {
-    const [companies, setCompanies] = useState({
+function Properties() {
+    const [properties, setProperties] = useState({
         data: [],
         isLoading: true,
     })
 
-    /** calls API to fetch companies based on optional filter */
-    async function getCompanies(filter = '') {
-        setCompanies({
-            data: await JoblyApi.getCompanies(filter),
+    /** calls API to fetch properties based on optional filter */
+    async function getProperties(filter = '') {
+        setProperties({
+            data: await ShareApi.getProperties(filter),
             isLoading: false
         })
     }
 
-    // technically, whenever a search is made, the companies are loading but the isLoading stays
+    // technically, whenever a search is made, the properties are loading but the isLoading stays
     // false because we don't set it back. We might need 3 states to handle this
 
-    /** Calls api to get companies when page is first mounted */
-    useEffect(function getCompaniesWhenMounted() {
-        getCompanies();
-
+    /** Calls api to get properties when page is first mounted */
+    useEffect(function getPropertiesWhenMounted() {
+        getProperties();
     }, []);
 
-    if (companies.isLoading) {
+    if (properties.isLoading) {
         return (
             <div className="spinner-border" style={{ width: "10rem", height: "10rem" }} role="status">
             </div>
@@ -42,12 +41,12 @@ function Companies() {
     }
 
     return (
-        <div className="CompanyList col-md-8 offset-md-2">
-            <SearchForm search={getCompanies} />
+        <div className="PropertyList col-md-8 offset-md-2">
+            <SearchForm search={getProperties} />
             <br />
-            <CompanyCardList companies={companies.data} />
+            <PropertyCardList properties={properties.data} />
         </div>
     )
 }
 
-export default Companies;
+export default Properties;

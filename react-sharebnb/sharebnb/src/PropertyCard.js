@@ -1,29 +1,24 @@
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import "./CompanyCard.css"
+import "./PropertyCard.css";
 // import ListGroup from "react-bootstrap/ListGroup";
 
-/** Makes a company card given a company
+/** Makes a property card given a property
  * Props:
- * - company: An object with information about a company
+ * - Property: An object with information about a property
  *
- * RoutesList -> Companies -> CompanyCardList -> CompanyCard
+ * RoutesList -> p=Properties -> PropertyCardList -> PropertyCard
  */
-function CompanyCard({ company }) {
-  let logo = null;
-
-  if (company.logoUrl) {
-    logo = <Card.Img variant="top" src={`${company.logoUrl}`} alt="Logo" />;
-  }
-
+function PropertyCard({ property }) {
   return (
     <div>
-      <Link className="company-card" to={`/companies/${company.handle}`}>
+      <Link className="Property-card" to={`/properties/${property.name}`}>
         <Card border="success" style={{ width: "18rem" }}>
+          <Card.Img src={property.imageUrl} alt={property.name} variant="top"/>
           <Card.Body >
-            <Card.Title>{company.name}</Card.Title>
-            {logo}
-            <Card.Text>{company.description}</Card.Text>
+            <Card.Title>{property.name}</Card.Title>
+            <Card.Text>{property.address}</Card.Text>
+            <Card.Text>${property.price}/night</Card.Text>
           </Card.Body>
         </Card>
       </Link>
@@ -31,9 +26,9 @@ function CompanyCard({ company }) {
   );
 }
 
-// Try to use bootstrap to make actual company cards! This is uglilicious rn.
+// Try to use bootstrap to make actual Property cards! This is uglilicious rn.
 // Maybe use ReactStrap?
 
-export default CompanyCard;
+export default PropertyCard;
 
 

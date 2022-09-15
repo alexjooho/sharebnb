@@ -1,17 +1,17 @@
-import CompanyCard from './CompanyCard'
+import PropertyCard from './PropertyCard'
 
-/** Makes a list of companies
+/** Makes a list of properties
  * Props:
- * - companies: An array of objects that include companies
+ * - properties: An array of objects that include properties
  *
- * RoutesList -> Companies -> CompanyCardList
+ * RoutesList -> properties -> PropertyCardList
  */
-function CompanyCardList({companies}) {
+function PropertyCardList({properties}) {
     return (
         <>
-            {companies.map(company => <CompanyCard key={company.handle} company={company}/>)}
+            {properties.map(property => <PropertyCard key={property.name} property={property}/>)}
         </>
     )
 }
 
-export default CompanyCardList;
+export default PropertyCardList;

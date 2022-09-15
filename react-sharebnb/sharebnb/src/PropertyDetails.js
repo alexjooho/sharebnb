@@ -2,6 +2,8 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ShareApi from './api';
 import BookForm from "./BookForm"
+import Alert from './Alert';
+import Loading from './Loading';
 
 /** Renders details for a specific property based on URL parameter
  * State: property: an object with information about the property
@@ -9,13 +11,15 @@ import BookForm from "./BookForm"
  * RoutesList -> Properties -> PropertyCardList -> PropertyCard -> PropertyDetails
  */
 
-function PropertyDetails({ update }) {
+function PropertyDetails() {
     const { name } = useParams();
     const [reserve, setReserve] = useState(false);
     const [property, setProperty] = useState({
         data: {},
         isLoading: true,
     });
+    const [booked, setBooked] = useState(false);
+    const [errorBooking, setErrorBooking] = useState([]);
 
     /** calls api to get a property by name based on url parameter */
     async function getProperty() {
@@ -36,8 +40,6 @@ function PropertyDetails({ update }) {
         getProperty();
     }, []);
 
-    document.title = name;
-
     /** sets the reserve status to true/false */
     function toggleReserve() {
         setReserve(!reserve);
@@ -45,16 +47,17 @@ function PropertyDetails({ update }) {
 
     /** reserve form saved; toggle reserve status, and update in ancestor */
     async function handleSave(formData) {
-        const resp = await ShareApi.bookProperty(formData);
-        setReserve(false);
+        try {
+            await ShareApi.bookProperty(formData);
+            setReserve(false);
+            setBooked(true);
+        }
+        catch (err) {
+            setErrorBooking(err);
+        }
     }
 
-    if (property.isLoading) {
-        return (
-            <div className="spinner-border" style={{ width: "10rem", height: "10rem" }} role="status">
-            </div>
-        );
-    }
+    if (property.isLoading) return <Loading />
 
     return (
         <div className="PropertyDetails col-md-8 offset-md-2">
@@ -65,8 +68,17 @@ function PropertyDetails({ update }) {
             <Link to={`/users/${property.owner}`}>
                 <p>hosted by:{property.owner}</p>
             </Link>
-            <button >book property!</button>
-            {reserve && <BookForm property={property} handleSave={handleSave}/>}
+            {reserve
+            ? <BookForm 
+                property={property} 
+                handleSave={handleSave} 
+                toggleReserve={toggleReserve}/>
+            : <button onClick={toggleReserve}>Book property!</button>}
+            {booked &&
+                    <Alert message="Booked Successfully!" type="success"/>}
+            {errorBooking &&
+                    errorBooking.map(
+                        err => <Alert key={err} message={err} type="danger"/>)}
         </div>
     );
 }

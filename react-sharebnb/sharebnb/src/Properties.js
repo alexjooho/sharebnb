@@ -2,6 +2,7 @@ import SearchForm from "./SearchForm";
 import PropertyCardList from "./PropertyCardList";
 import { useState, useEffect } from 'react';
 import ShareApi from './api';
+import Loading from "./Loading";
 
 /** Renders a list of all properties filtered by value of search form
  * State:
@@ -33,12 +34,7 @@ function Properties() {
         getProperties();
     }, []);
 
-    if (properties.isLoading) {
-        return (
-            <div className="spinner-border" style={{ width: "10rem", height: "10rem" }} role="status">
-            </div>
-        )
-    }
+    if (properties.isLoading) return <Loading />
 
     return (
         <div className="PropertyList col-md-8 offset-md-2">

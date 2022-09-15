@@ -39,8 +39,6 @@ function LoginForm({ login }) {
             await login(formData);
             setFormData(INITIAL_FORM_DATA);
             navigate("/");
-            // why doesn't return Navigate to= work?
-            // nvm, it works, but you should still use useNavigate
         }
         catch (err) {
             setWrongCredentials(err[0]);

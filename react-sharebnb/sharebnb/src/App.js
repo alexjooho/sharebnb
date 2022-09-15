@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import userContext from "./userContext";
 import ShareApi from "./api";
 import jwt_decode from "jwt-decode";
+import Loading from "./Loading";
 
 /** App for rendering Sharebnb */
 function App() {
@@ -34,11 +35,6 @@ function App() {
   // what happens when someone logs out and it tries to decode null?
   // that's why we have the if(token) part
 
-  function update(formData) {
-
-  }
-
-
     useEffect(
       function updateUser() {
         async function getUserDetails() {
@@ -64,12 +60,7 @@ function App() {
     // userContext should just be about presentational information about user
     // for the functions (login, signup, updateProfile), we should prop drill them
 
-    if (isLoading) {
-      return (
-        <div className="spinner-border" style={{ width: "10rem", height: "10rem" }} role="status">
-        </div>
-      );
-    }
+    if (isLoading) return <Loading />
 
     return (
       <div className="App">
@@ -78,7 +69,7 @@ function App() {
         >
           <BrowserRouter>
             <Nav logout={logout} />
-            <RoutesList login={login} signup={signup} update={update}/>
+            <RoutesList login={login} signup={signup}/>
           </BrowserRouter>
         </userContext.Provider>
       </div>

@@ -8,8 +8,7 @@ import { useState } from 'react';
  * State:
  * -filter: The form data
  *
- * RoutesList -> Companies -> SearchForm
- * RoutesList -> Jobs -> SearchForm
+ * RoutesList -> Properties -> SearchForm
  */
 
 function SearchForm({ search }) {

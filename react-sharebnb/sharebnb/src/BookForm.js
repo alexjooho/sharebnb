@@ -9,7 +9,7 @@ import BookedDates from "./BookedDates";
  * - property: The property object
  * - toggleReserve: function to call in parent to show or hide form
  * - handleSave: function to call in parent to add booking
- * 
+ *
  * State:
  * - formData: The form data
  *
@@ -107,11 +107,11 @@ function BookForm({ property, toggleReserve, handleSave }) {
                     />
                 </div>
 
-                <button type="submit" className="btn-primary rig btn btn-sm NewBookForm-addBtn">
+                <button type="submit" className="btn-primary mb-3 rig btn btn-sm NewBookForm-addBtn">
                     Reserve!
                 </button>
             </form>
-            <button onClick={toggleReserve} className="btn-primary rig btn btn-sm NewBookForm-addBtn">
+            <button onClick={toggleReserve} className="btn-primary mb-3 rig btn btn-sm NewBookForm-addBtn">
                 Cancel
             </button>
             <BookedDates property={property} />

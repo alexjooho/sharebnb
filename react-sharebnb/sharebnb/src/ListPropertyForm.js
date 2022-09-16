@@ -7,7 +7,7 @@ import userContext from "./userContext";
  * Props:
  * - toggleShowForm: function to call in parent to show or hide form
  * - handleSave: function to call in parent to add booking
- * 
+ *
  * State:
  * - formData: The form data
  *
@@ -136,7 +136,7 @@ function ListPropertyForm({ toggleShowForm, handleSave }) {
                     />
                 </div>
 
-                <button type="submit" className="btn-primary rig btn btn-sm NewListPropertyForm-addBtn">
+                <button type="submit" className="btn-primary mb-3 rig btn btn-sm NewListPropertyForm-addBtn">
                     Add Property to Listing!
                 </button>
             </form>

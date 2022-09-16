@@ -10,7 +10,7 @@ import Card from "react-bootstrap/Card";
  */
 function PropertyCard({ property }) {
   return (
-    <div>
+    <div className="col-3 mb-3">
       <Link className="Property-card" to={`/properties/${property.name}`}>
         <Card border="success" style={{ width: "18rem" }}>
           <Card.Img src={property.imageUrl} alt={property.name} variant="top" />

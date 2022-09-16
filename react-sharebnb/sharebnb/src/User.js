@@ -11,17 +11,17 @@ import PropertyCardList from './PropertyCardList'
 import BookingCardList from './BookingCardList'
 
 /** Function for rendering a user's profile
- * 
+ *
  * If a user is logged in and is viewing their own profile,
  * this function will render their bookings and allow user to add property listings
- * 
+ *
  * States:
  * -user: User with data for user and isLoading
  * -userBookings: array of bookings for a user
  * -showPropertyForm: boolean indicating whether to show the add property form
  * -propertyAdded: boolean indicating whether a property was added
  * -errorAdding: array of error messages if there was an error adding a property
- * 
+ *
  */
 
 function User() {
@@ -60,7 +60,7 @@ function User() {
             // will result in an endless async loop
         }
     }
-    
+
     document.title = `ShareBnB ${name}`;
 
     /** Get bookings for user with username of username */
@@ -105,8 +105,8 @@ function User() {
     }
 
     return (
-        <>
-            <p>Listed Properties: </p>
+        <div className="container col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+            <div>Listed Properties: </div>
             <PropertyCardList properties={user.data.properties} />
             <br />
             {showForm}
@@ -118,7 +118,7 @@ function User() {
                     err => <Alert key={err} message={err} type="danger" />)}
             <br />
             {userBookings && <BookingCardList bookings={userBookings} />}
-        </>
+        </div>
     )
 }
 

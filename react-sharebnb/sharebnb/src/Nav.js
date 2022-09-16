@@ -5,7 +5,7 @@ import userContext from './userContext';
 import { useContext } from "react";
 
 
-/** Navbar for links to different routes 
+/** Navbar for links to different routes
  * Props:
  * - logout: function for handling logout
 */
@@ -13,7 +13,7 @@ function Nav({ logout }) {
     const user = useContext(userContext);
 
     return (
-        <Navbar className="NavBar" bg="light" expand="lg">
+        <Navbar className="NavBar mb-4" bg="light" expand="lg">
             <NavLink className="home" to="/">
                 ShareBnB
             </NavLink>

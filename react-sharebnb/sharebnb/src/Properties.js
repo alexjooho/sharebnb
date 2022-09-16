@@ -17,14 +17,14 @@ function Properties() {
     const [properties, setProperties] = useState({
         data: [],
         isLoading: true,
-    })
+    });
 
     /** calls API to fetch properties based on optional filter */
     async function getProperties(filter = '') {
         setProperties({
             data: await ShareApi.getProperties(filter),
             isLoading: false
-        })
+        });
     }
 
     // technically, whenever a search is made, the properties are loading but the isLoading stays
@@ -35,15 +35,19 @@ function Properties() {
         getProperties();
     }, []);
 
-    if (properties.isLoading) return <Loading />
+    if (properties.isLoading) return <Loading />;
 
     return (
-        <div className="PropertyList col-md-8 offset-md-2">
-            <SearchForm search={getProperties} />
+        <div>
+            <div className="PropertyList container-fluid col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                <SearchForm search={getProperties} />
+            </div>
             <br />
-            <PropertyCardList properties={properties.data} />
+            <div className="container-fluid">
+                <PropertyCardList properties={properties.data} />
+            </div>
         </div>
-    )
+    );
 }
 
 export default Properties;

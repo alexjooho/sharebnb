@@ -8,7 +8,7 @@ import PropertyCard from './PropertyCard'
  */
 function PropertyCardList({ properties }) {
     return (
-        <div className="property-card-list">
+        <div className="property-card-list row justify-content-center">
             {properties.map(property => <PropertyCard key={property.name} property={property} />)}
         </div>
     )

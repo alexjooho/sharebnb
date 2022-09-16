@@ -43,7 +43,7 @@ function Properties() {
                 <SearchForm search={getProperties} />
             </div>
             <br />
-            <div className="container-fluid">
+            <div className="container-fluid col-md-10 offset-md-1 col-lg-10 offset-lg-1">
                 <PropertyCardList properties={properties.data} />
             </div>
         </div>

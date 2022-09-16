@@ -8,8 +8,10 @@ import BookingCard from './BookingCard'
  */
 function BookingCardList({ bookings }) {
     return (
-        <div className="booking-card-list">
-            <p>Booked Properties: </p>
+        <div className="booking-card-list row justify-content-center">
+            <h3>Booked Properties: </h3>
+            <br/>
+            <br/>
             {bookings.map(
                 booking => <BookingCard
                     key={booking.propertyName + booking.dateBooked}

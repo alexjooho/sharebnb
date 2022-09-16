@@ -66,7 +66,7 @@ function PropertyDetails() {
     if (property.isLoading) return <Loading />
 
     return (
-        <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <div className="container-fluid col-md-6 offset-md-3 col-lg-4 offset-lg-4">
             <h1>{property.data.name}</h1>
             <img width={500} height={500} src={property.data.imageUrl} alt={property.data.name} />
             <h2>{property.data.address}</h2>

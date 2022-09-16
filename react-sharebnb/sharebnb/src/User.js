@@ -101,12 +101,14 @@ function User() {
     if (username === name) {
         showForm = showPropertyForm ?
             <ListPropertyForm toggleShowForm={toggleShowForm} handleSave={addProperty} />
-            : <button onClick={toggleShowForm}>Add New Property Listing!</button>
+            : <button 
+            className="btn-primary rig btn btn-sm"
+            onClick={toggleShowForm}>Add New Property Listing!</button>
     }
 
     return (
         <div className="container col-md-10 offset-md-1 col-lg-10 offset-lg-1">
-            <div>Listed Properties: </div>
+            <h3>Listed Properties: </h3>
             <PropertyCardList properties={user.data.properties} />
             <br />
             {showForm}

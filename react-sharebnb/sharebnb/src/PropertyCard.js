@@ -11,16 +11,16 @@ import Card from "react-bootstrap/Card";
 function PropertyCard({ property }) {
   return (
     <div className="col-3 mb-3">
-      <Link className="Property-card" to={`/properties/${property.name}`}>
-        <Card border="success" style={{ width: "18rem" }}>
+      <Card border="success" style={{ width: "18rem" }}>
+        <Link className="Property-card" to={`/properties/${property.name}`}>
           <Card.Img src={property.imageUrl} alt={property.name} variant="top" />
           <Card.Body >
             <Card.Title>{property.name}</Card.Title>
             <Card.Text>Address: {property.address}</Card.Text>
             <Card.Text>${property.price}/night</Card.Text>
           </Card.Body>
-        </Card>
-      </Link>
+        </Link>
+      </Card>
     </div>
   );
 }

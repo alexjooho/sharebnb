@@ -9,15 +9,15 @@ import Card from "react-bootstrap/Card";
  */
 function BookingCard({ booking }) {
   return (
-    <div>
-      <Link className="booking-property" to={`/properties/${booking.propertyName}`}>
-        <Card border="success" style={{ width: "18rem" }}>
+    <div className="col-3 mb-3">
+      <Card border="success" style={{ width: "18rem" }}>
+        <Link className="booking-property" to={`/properties/${booking.propertyName}`}>
           <Card.Body >
             <Card.Title>Property Name: {booking.propertyName}</Card.Title>
             <Card.Text>Booked from: {booking.startDate} through {booking.endDate}</Card.Text>
           </Card.Body>
-        </Card>
-      </Link>
+        </Link>
+      </Card>
     </div>
   );
 }

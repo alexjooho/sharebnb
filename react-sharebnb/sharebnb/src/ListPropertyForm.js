@@ -136,11 +136,13 @@ function ListPropertyForm({ toggleShowForm, handleSave }) {
                     />
                 </div>
 
-                <button type="submit" className="btn-primary mb-3 rig btn btn-sm NewListPropertyForm-addBtn">
+                <button type="submit"
+                    className="btn-primary mb-3 rig btn btn-sm NewListPropertyForm-addBtn">
                     Add Property to Listing!
                 </button>
             </form>
-            <button onClick={toggleShowForm} className="btn-primary rig btn btn-sm NewListPropertyForm-addBtn">
+            <button onClick={toggleShowForm}
+                className="btn-primary mb-3 rig btn btn-sm NewListPropertyForm-addBtn">
                 Cancel
             </button>
         </>

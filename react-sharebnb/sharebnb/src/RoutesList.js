@@ -23,14 +23,14 @@ function RoutesList({ login, signup }) {
       <Route element={<Home />} path="/" />
       <Route element={<Properties />} path="/properties" />
       <Route element={<PropertyDetails />} path="/properties/:name" />
-      <Route element={<User />} path="/users/:username" />
+      <Route element={<User />} path="/users/:name" />
       {!user &&
         <>
           <Route element={<LoginForm login={login} />} path="/login" />
           <Route element={<SignupForm signup={signup} />} path="/signup" />
         </>
       }
-      <Route element={<NotFound/>} path="*" />
+      <Route element={<NotFound />} path="*" />
     </Routes>
   );
 }

@@ -52,7 +52,7 @@ function BookForm({ property, toggleReserve, handleSave }) {
             <form className="NewBookForm" onSubmit={handleSubmit}>
 
                 <div className="mb-3">
-                    <label for="propertyName"> Property Name</label>
+                    <label htmlFor="propertyName"> Property Name</label>
                     <input
                         id="propertyName"
                         name="propertyName"
@@ -66,12 +66,12 @@ function BookForm({ property, toggleReserve, handleSave }) {
                 </div>
 
                 <div className="mb-3">
-                    <label for="startDate"> Start Date </label>
+                    <label htmlFor="startDate"> Start Date </label>
                     <input
                         id="startDate"
                         name="startDate"
                         className="form-control"
-                        placeholder="Start Date"
+                        placeholder="YYYY-MM-DD"
                         onChange={handleChange}
                         value={formData.startDate}
                         aria-label="Start Date"
@@ -80,12 +80,12 @@ function BookForm({ property, toggleReserve, handleSave }) {
                 </div>
 
                 <div className="mb-3">
-                    <label for="endDate"> End Date </label>
+                    <label htmlFor="endDate"> End Date </label>
                     <input
                         id="endDate"
                         name="endDate"
                         className="form-control"
-                        placeholder="End Date"
+                        placeholder="YYYY-MM-DD"
                         onChange={handleChange}
                         value={formData.endDate}
                         aria-label="End Date"
@@ -94,7 +94,7 @@ function BookForm({ property, toggleReserve, handleSave }) {
                 </div>
 
                 <div className="mb-3">
-                    <label for="username"> Username </label>
+                    <label htmlFor="username"> Username </label>
                     <input
                         id="username"
                         name="username"
@@ -114,7 +114,7 @@ function BookForm({ property, toggleReserve, handleSave }) {
             <button onClick={toggleReserve} className="btn-primary rig btn btn-sm NewBookForm-addBtn">
                 Cancel
             </button>
-            <BookedDates property={property}/>
+            <BookedDates property={property} />
         </>
     );
 }

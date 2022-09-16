@@ -23,8 +23,8 @@ function Nav({ logout }) {
             </NavLink>
             <br />
             {user
-                ? <><NavLink className="Profile" to={`/users/${user.username}`}>
-                    Your Bookings
+                ? <><NavLink className="profile" to={`/users/${user.username}`}>
+                    Profile
                 </NavLink>
                     <br />
                     <NavLink className="logout" onClick={logout} to="/">
@@ -42,7 +42,7 @@ function Nav({ logout }) {
                     </NavLink>
                     <br />
                 </>}
-    </Navbar>
+        </Navbar>
     );
 }
 

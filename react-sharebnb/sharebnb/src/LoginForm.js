@@ -15,6 +15,7 @@ import Alert from './Alert';
  */
 
 function LoginForm({ login }) {
+    document.title = "Login";
     const INITIAL_FORM_DATA = {
         username: '',
         password: '',
@@ -46,7 +47,7 @@ function LoginForm({ login }) {
         }
     }
     // make sure to await the async function!!
-    
+
     return (
         <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
             <h1>Login!</h1>
@@ -76,7 +77,7 @@ function LoginForm({ login }) {
                     />
                 </div>
                 {wrongCredentials &&
-                    <Alert message={wrongCredentials} type="danger"/>}
+                    <Alert message={wrongCredentials} type="danger" />}
                 <button className="btn-primary rig btn btn-sm">
                     Submit!
                 </button>

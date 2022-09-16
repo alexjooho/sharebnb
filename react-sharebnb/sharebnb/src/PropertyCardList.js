@@ -6,10 +6,10 @@ import PropertyCard from './PropertyCard'
  *
  * RoutesList -> properties -> PropertyCardList
  */
-function PropertyCardList({properties}) {
+function PropertyCardList({ properties }) {
     return (
         <div className="property-card-list">
-            {properties.map(property => <PropertyCard key={property.name} property={property}/>)}
+            {properties.map(property => <PropertyCard key={property.name} property={property} />)}
         </div>
     )
 }

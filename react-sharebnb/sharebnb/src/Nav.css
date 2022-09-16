@@ -1,4 +1,4 @@
-.home, .properties, .bookings, .logout, .login, .signup {
+.home, .properties, .profile {
     float: right;
     padding: 12px;
     color: blue;
@@ -7,6 +7,16 @@
     width: 25%;
     text-align: center;
 
+}
+
+.logout, .login, .signup {
+    float: right;
+    padding: 12px;
+    color: blue;
+    text-decoration: none;
+    font-size: 17px;
+    width: 25%;
+    text-align: center;
 }
 
 .active {

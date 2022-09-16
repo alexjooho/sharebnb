@@ -4,19 +4,23 @@
  * Props:
  * - property: Property object
  * 
+ * BookForm -> BookedDates
  */
 
-function BookedDates({property}) {
-    
+function BookedDates({ property }) {
+
     const bookedDatesArray = property.bookings.map(
         booking => `${booking.startDate} through ${booking.endDate}`
     )
-    
+
     return (
-        <ul>
-            {bookedDatesArray.map(booking =>
-                <li key={booking}>{booking}</li>)}
-        </ul>
+        <>
+            <p>Unavailable on these dates:</p>
+            <ul>
+                {bookedDatesArray.map(booking =>
+                    <li key={booking}>{booking}</li>)}
+            </ul>
+        </>
     )
 }
 

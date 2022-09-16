@@ -4,7 +4,7 @@
  * - type: the type of alert message (success, danger, etc)
  */
 
- function Alert({ message, type }) {
+function Alert({ message, type }) {
     return (
         <div className={`mb-3 alert alert-${type}`} role="alert">{message}
         </div>

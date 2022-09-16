@@ -6,13 +6,14 @@ import BookingCard from './BookingCard'
  *
  * RoutesList -> User -> BookingCardList -> BookingCard
  */
-function BookingCardList({bookings}) {
+function BookingCardList({ bookings }) {
     return (
         <div className="booking-card-list">
+            <p>Booked Properties: </p>
             {bookings.map(
-                booking => <BookingCard 
-                    key={booking.propertyName+booking.dateBooked} 
-                    booking={booking}/>)}
+                booking => <BookingCard
+                    key={booking.propertyName + booking.dateBooked}
+                    booking={booking} />)}
         </div>
     )
 }

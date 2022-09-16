@@ -4,6 +4,7 @@ import ShareApi from './api';
 import BookForm from "./BookForm"
 import Alert from './Alert';
 import Loading from './Loading';
+import NotFound from './NotFound';
 
 /** Renders details for a specific property based on URL parameter
  * State: property: an object with information about the property
@@ -21,19 +22,22 @@ function PropertyDetails() {
     const [booked, setBooked] = useState(false);
     const [errorBooking, setErrorBooking] = useState([]);
 
+    const [invalidProperty, setInvalidProperty] = useState(false);
+
     /** calls api to get a property by name based on url parameter */
     async function getProperty() {
         let resp;
         try {
             resp = await ShareApi.getProperty(name);
+            setProperty({
+                data: resp,
+                isLoading: false,
+            });
         } catch (err) {
-            return <Navigate to="/properties" />;
+            setInvalidProperty(true);
         }
-        setProperty({
-            data: resp,
-            isLoading: false,
-        });
     }
+    document.title = name;
 
     /** Calls api to get property by name when page is first mounted */
     useEffect(function getPropertyWhenMounted() {
@@ -57,6 +61,8 @@ function PropertyDetails() {
         }
     }
 
+    if (invalidProperty) return <NotFound message={`There is no such property: ${name}`} />;
+
     if (property.isLoading) return <Loading />
 
     return (
@@ -65,20 +71,20 @@ function PropertyDetails() {
             <img src={property.data.imageUrl} alt={property.data.name} />
             <h2>{property.data.address}</h2>
             <p>price: ${property.data.price}/night</p>
-            <Link to={`/users/${property.owner}`}>
-                <p>hosted by:{property.owner}</p>
+            <Link to={`/users/${property.data.owner}`}>
+                <p>hosted by: {property.data.owner}</p>
             </Link>
             {reserve
-            ? <BookForm 
-                property={property} 
-                handleSave={handleSave} 
-                toggleReserve={toggleReserve}/>
-            : <button onClick={toggleReserve}>Book property!</button>}
+                ? <BookForm
+                    property={property.data}
+                    handleSave={handleSave}
+                    toggleReserve={toggleReserve} />
+                : <button onClick={toggleReserve}>Book property!</button>}
             {booked &&
-                    <Alert message="Booked Successfully!" type="success"/>}
+                <Alert message="Booked Successfully!" type="success" />}
             {errorBooking &&
-                    errorBooking.map(
-                        err => <Alert key={err} message={err} type="danger"/>)}
+                errorBooking.map(
+                    err => <Alert key={err} message={err} type="danger" />)}
         </div>
     );
 }

@@ -15,7 +15,6 @@ function BookingCard({ booking }) {
           <Card.Body >
             <Card.Title>Property Name: {booking.propertyName}</Card.Title>
             <Card.Text>Booked from: {booking.startDate} through {booking.endDate}</Card.Text>
-            <Card.Text>Booked: {booking.dateBooked}</Card.Text>
           </Card.Body>
         </Card>
       </Link>

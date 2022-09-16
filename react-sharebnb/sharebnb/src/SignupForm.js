@@ -13,6 +13,7 @@ import Alert from './Alert';
  */
 
 function SignupForm({ signup }) {
+    document.title = "Signup";
     const INITIAL_FORM_DATA = {
         username: '',
         password: '',
@@ -110,7 +111,7 @@ function SignupForm({ signup }) {
                     />
                 </div>
                 {wrongCredentials &&
-                    <Alert message={wrongCredentials} type="danger"/>}
+                    <Alert message={wrongCredentials} type="danger" />}
 
                 <button className="btn-primary rig btn btn-sm">
                     Submit!

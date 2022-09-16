@@ -13,6 +13,7 @@ import Loading from "./Loading";
  * RoutesList -> Properties -> PropertyCardList
  */
 function Properties() {
+    document.title = "Properties";
     const [properties, setProperties] = useState({
         data: [],
         isLoading: true,

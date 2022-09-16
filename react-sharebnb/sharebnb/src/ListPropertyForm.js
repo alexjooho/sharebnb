@@ -38,7 +38,7 @@ function ListPropertyForm({ toggleShowForm, handleSave }) {
             [fieldName]: value
         }));
     }
-    
+
     function handleFileChange(evt) {
         setFormData(currData => ({
             ...currData,
@@ -51,26 +51,25 @@ function ListPropertyForm({ toggleShowForm, handleSave }) {
         evt.preventDefault();
         const submitFormData = new FormData();
         // HAVE TO DO new FormData() to allow sending of multipart form data!
-        
+
         submitFormData.append("name", formData.name)
         submitFormData.append("address", formData.address)
         submitFormData.append("price", formData.price)
-        submitFormData.append("owner", formData.owner)
         submitFormData.append("image", formData.file)
-        
+
         handleSave(submitFormData);
         setFormData(initialFormData);
     }
 
     return (
         <>
-            <form 
-                className="NewListPropertyForm" 
+            <form
+                className="NewListPropertyForm"
                 onSubmit={handleSubmit}
-                enctype="multipart/form-data">
+                encType="multipart/form-data">
 
                 <div className="mb-3">
-                    <label for="name"> Property Name </label>
+                    <label htmlFor="name"> Property Name </label>
                     <input
                         id="name"
                         name="name"
@@ -83,7 +82,7 @@ function ListPropertyForm({ toggleShowForm, handleSave }) {
                 </div>
 
                 <div className="mb-3">
-                <label for="address"> Address </label>
+                    <label htmlFor="address"> Address </label>
                     <input
                         id="address"
                         name="address"
@@ -97,7 +96,7 @@ function ListPropertyForm({ toggleShowForm, handleSave }) {
                 </div>
 
                 <div className="mb-3">
-                <label for="price"> Price per night </label>
+                    <label htmlFor="price"> Price per night </label>
                     <input
                         id="price"
                         name="price"
@@ -111,21 +110,21 @@ function ListPropertyForm({ toggleShowForm, handleSave }) {
                 </div>
 
                 <div className="mb-3">
-                <label for="owner"> Property Owner Username </label>
+                    <label htmlFor="owner"> Property Owner Username </label>
                     <input
                         id="owner"
                         name="owner"
                         className="form-control"
                         onChange={handleChange}
                         value={formData.owner}
-                        aria-label= "property owner"
+                        aria-label="property owner"
                         disabled={true}
                         required
                     />
                 </div>
                 <div className="mb-3">
-                    <label for="image">Image File</label>
-                    <input 
+                    <label htmlFor="image">Image File</label>
+                    <input
                         type="file"
                         accept="image/*"
                         id="image"

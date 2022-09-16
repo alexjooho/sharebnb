@@ -13,7 +13,7 @@ function PropertyCard({ property }) {
     <div>
       <Link className="Property-card" to={`/properties/${property.name}`}>
         <Card border="success" style={{ width: "18rem" }}>
-          <Card.Img src={property.imageUrl} alt={property.name} variant="top"/>
+          <Card.Img src={property.imageUrl} alt={property.name} variant="top" />
           <Card.Body >
             <Card.Title>{property.name}</Card.Title>
             <Card.Text>Address: {property.address}</Card.Text>

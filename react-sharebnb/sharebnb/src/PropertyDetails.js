@@ -20,7 +20,7 @@ function PropertyDetails() {
         isLoading: true,
     });
     const [booked, setBooked] = useState(false);
-    const [errorBooking, setErrorBooking] = useState([]);
+    const [errorBooking, setErrorBooking] = useState(null);
 
     const [invalidProperty, setInvalidProperty] = useState(false);
 
@@ -55,8 +55,10 @@ function PropertyDetails() {
             await ShareApi.bookProperty(formData);
             setReserve(false);
             setBooked(true);
+            setErrorBooking(null);
         }
         catch (err) {
+            setBooked(false);
             setErrorBooking(err);
         }
     }

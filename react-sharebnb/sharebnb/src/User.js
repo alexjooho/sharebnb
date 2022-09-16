@@ -87,9 +87,11 @@ function User() {
         try {
             await ShareApi.addProperty(formData);
             setPropertyAdded(true);
+            setErrorAdding(null);
         }
         catch (err) {
             setErrorAdding(err);
+            setPropertyAdded(false);
         }
     }
 
@@ -107,7 +109,7 @@ function User() {
     }
 
     return (
-        <div className="container col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+        <div className="container-fluid col-md-10 offset-md-1 col-lg-10 offset-lg-1">
             <h3>Listed Properties: </h3>
             <PropertyCardList properties={user.data.properties} />
             <br />
